@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #267fe4;
+    --secundary-color: rgba(241, 245, 8, 0.931);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    background-color: var(--primary-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    background-color: white;
+    width: 100%;
+    padding: 32px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.links {
+    font-size: 22px;
+}
+
+.links a + a { /* a + a ele vai selecionar o members */
+    margin-left: 32px; /* empura o link para o lado */
+}
+
+.links a {
+    text-decoration: none; /* tira o anderline */
+    color: #777;
+    position: relative;
+}
+
+.links a.active {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.links a:hover {
+    color: var(--primary-color);
+}
+
+.links a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+}
+
+.links a:hover::after {
+    width: 100%;    
+    transition: width 200ms ease-in-out;
+}
+
+/* ======= CARD ======== */
+
+.card {
+    background-color: white;
+    width: 800px;
+    min-height: 350px;
+
+    margin: 35px auto; /* 45px é a margin do topo*/
+
+    /* dividido ao meio */
+    display: grid;
+    grid-template-columns: 40% 60%;  
+    
+    /* sombra */
+    box-shadow: 10px 10px rgb(245, 75, 8);
+
+    /* animation */
+    
+    animation-name: up;
+    animation-duration: 700ms;
+    animation-fill-mode: ease-out;
+    animation-delay: 2x;
+}
+
+@keyframes up {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* details */
+
+.details {
+    padding: 32px;
+}
+
+.details .item { /* borda que divide os itens */
+    border-top: 1px solid  rgb(245, 75, 8);
+    padding: 16px 0;
+
+}
+
+.details.item:first-child { /* tira a primeira borda */
+    border: none;
+}
+
+.details h3
+.details .item div:nth-child(1) { /* pega a primeira div */
+    font-size: 14px;
+    line-height: 24px;
+    color: #777;
+    letter-spacing: 0.7px; /*espaçamento entre lentras */
+    font-weight: normal;
+}
+
+.details .item div:nth-child(2) { /* pega a segunda div */
+    color: #777;
+    font-weight: bold;
+    font-size: 18px;    
+}
+
+.details h3 { 
+    text-transform: uppercase; /* deixa o texto com as letras maiuscula */
+    font-weight: bold; 
+    color: var(--primary-color);    
+}
+
+.details .item span { 
+    padding: 8px 16px;
+    background-color: var(--secundary-color);
+    border-radius: 16px;
+    color: #777;
+    margin-right: 4px;
+    margin-top: 8px;  
+    display: inline-block;
+    font-weight: bold; 
+    text-transform: 12px;
+    font-size: 12px;
+}
+
+/* ============================= FORMULARIO ============================*/
+
+input, select {
+    width: 100%;
+    outline: none; /* tira a linha do input */
+    color: #777;
+    font-weight: bold;
+    font-size: 18px; 
+}
+
+input[type="radio"] {
+    width: initial;
+    margin-right: 4px;
+}
+
+input::placeholder {
+    font-size: 16x;
+    font-weight: normal;
+}
+
+button[type="submit"],
+a.button {
+    padding: 8px 32px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    margin-top: 32px;
+    /* width: 100%; */
+    font-size: 16px;
+}
+
+a.button {
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+}
+
+#form-delete button[type="submit"] {
+    background-color: lightcoral;
+}
+
+/* INDEX TEACHER */
+.table-container {
+    display: block; /* tira o grid */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.table-container table { /* tira a configuração padrão da tabela*/
+    border-spacing: 0;
+}
+
+.table-container thead tr th,
+tbody tr td {
+    text-align: center;
+}
+
+td, th {
+    padding: 16px;
+    border-bottom: 1px solid rgb(245, 75, 8);
+}
+
+th {
+    text-transform: uppercase;
+    color: #777;
+    font-size: 14px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none; /* tira a ultima borda */
+}
+
+tbody tr td:first-child {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+}
+
+tbody tr td:first-child span {
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 3px 1px 6px -4px black;
+    border: 2px solid wheat;
+}
+
+
+tbody tr td:last-child a,
+.table-container > a {
+    background-color: var(--primary-color);
+    padding: 8px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.table-container > a {
+   margin-bottom: 16px;
+   display: inline-block; 
+}
+
+.table-container thead tr th:last-child,
+td:last-child {
+    text-align: center;
+}
