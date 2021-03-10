@@ -34,7 +34,7 @@ module.exports = {
             data.education_level,
             data.class_type,
             data.subjects_taught,
-            data.create_at
+            date(Date.now()).iso
         ]
 
         db.query(query, values, function(err, results) {
@@ -53,8 +53,44 @@ module.exports = {
             if(err) throw `Database Erro! ${err}`
 
             callback(results.rows[0])
-        })
-       
+        })       
     },
+
+    update(data, callback){
+        const query = `
+        UPDATE teachers SET
+            avatar_url=($1),
+            name=($2),
+            birth=($3),
+            education_level=($4),
+            class_type=($5),
+            subjects_taught=($6)
+        WHERE id = $7
+        `
+
+        const values = [
+            data.avatar_url,
+            data.name,
+            date(data.birth).iso,
+            data.education_level,
+            data.class_type,
+            data.subjects_taught,
+            data.id
+        ]
+
+        db.query(query, values, function(err, results){
+            if(err) throw `DATABASE error! ${err}`
+
+            callback()
+        })
+    },
+
+    delete(id, callback) {
+        db.query(`DELETE FROM teachers WHERE id = $1`, [id], function(err, results) {
+            if(err) throw `Database Erro! ${err}` // throw = lançar
+
+            return callback()
+        })
+    }
     
 }

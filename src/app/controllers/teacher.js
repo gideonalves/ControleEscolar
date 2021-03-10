@@ -1,4 +1,4 @@
-const { age, grade, date } = require('../../lib/utils')
+const { age, graduation, date } = require('../../lib/utils')
 const Intl = require('intl')
 const Teacher = require('../models/Teacher')
 
@@ -34,15 +34,29 @@ module.exports = {
 
             teacher.age = age(teacher.birth)
             teacher.subjects_taught = teacher.subjects_taught.split(",")
+            teacher.created_at = date(teacher.created_at).format
+
+            teacher.education_level = graduation(teacher.education_level)
+
 
             return res.render("teachers/show", { teacher })
         })
     },
     
     edit (req, res) {   
-        // req.params
-        
-        return 
+            Teacher.find(req.params.id, function(teacher) {
+                if (!teacher) return res.send("Teacher not found!")
+
+                teacher.birth = date(teacher.birth).iso
+
+                teacher.subjects_taught = teacher.subjects_taught.split(",")
+                teacher.created_at = date(teacher.created_at).format
+
+                teacher.education_level = graduation(teacher.education_level)
+
+
+                return res.render("teachers/edit", { teacher })
+        })
     },
 
     put (req, res) {
@@ -52,15 +66,17 @@ module.exports = {
             if (req.body[key] == "") {
                 return res.send('Please, fill all fields!')
             }
-            /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-    
+            /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */    
         }
-        return
+        Teacher.update(req.body, function() {
+            return res.redirect(`/teachers/${req.body.id}`)
+        })
     },
     
     delete (req, res ) {
-      
-            return 
+        Teacher.delete(req.body.id, function() {
+            return res.redirect(`/teachers`)
+        })
     }
     
 }
