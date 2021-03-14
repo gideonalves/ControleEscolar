@@ -9,6 +9,7 @@
                 <tr>{# linha #}
                     <th>Nome completo</th>{# coluna #}
                     <th>Acompanhamento</th>{# coluna #}
+                    <th>Estudantes</th>{# coluna #}
                     <th>Ação</th>{# coluna #}
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                         <span style="background-image: url({{teachers.avatar_url}})"></span>
                          {{ teachers.name }}</td>
                         <td>{{ teachers.subjects_taught }}</td>
+                        <td>{{ teachers.total_studentes }}</td>
                         <td><a href="/teachers/{{ teachers.id }}">ver</a></td>
                     </tr>
                 {% endfor %}
