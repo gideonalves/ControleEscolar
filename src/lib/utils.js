@@ -38,11 +38,14 @@ module.exports = {
             month,
             year,
             iso: `${year}-${month}-${day}`,
-            birthDay: `${day}/${month}`,
+            birthDay: `${day}/${month}/${year}`,
             format: `${day}/${month}-${year}`
         }
     },
     
+
+    
+
     grade(grade) {
         switch (grade) {
             case ("5EF"): return "5º ano do ensino fundamental";
