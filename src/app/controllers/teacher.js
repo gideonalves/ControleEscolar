@@ -10,11 +10,24 @@ module.exports = {
        })
     },
 
+    show (req, res) {    
+        Teacher.find(req.params.id, function(teacher) {
+            if (!teacher) return res.send("Teacher not found!")
+
+            teacher.age = age(teacher.birth)
+            teacher.subjects_taught = teacher.subjects_taught.split(",")
+            teacher.education_level = graduation(teacher.education_level)
+            teacher.created_at = date(teacher.created_at).format
+
+            return res.render("teachers/show", { teacher })
+        })
+    },
+
     create (req, res) {  
         return res.render("teachers/create")
     },
      
-    post (req, res) {
+    post (req, res) { // POST = A CREAT CRIAR
     
         const keys = Object.keys(req.body)
         for (key of keys) {
@@ -28,31 +41,18 @@ module.exports = {
     
     },
     
-    show (req, res) {    
-        Teacher.find(req.params.id, function(teacher) {
-            if (!teacher) return res.send("Teacher not found!")
 
-            teacher.age = age(teacher.birth)
-            teacher.subjects_taught = teacher.subjects_taught.split(",")
-            teacher.created_at = date(teacher.created_at).format
-
-            teacher.education_level = graduation(teacher.education_level)
-
-
-            return res.render("teachers/show", { teacher })
-        })
-    },
     
     edit (req, res) {   
             Teacher.find(req.params.id, function(teacher) {
                 if (!teacher) return res.send("Teacher not found!")
 
                 teacher.birth = date(teacher.birth).iso
-
                 teacher.subjects_taught = teacher.subjects_taught.split(",")
+                // teacher.education_level = graduation(teacher.education_level)
+
                 teacher.created_at = date(teacher.created_at).format
 
-                teacher.education_level = graduation(teacher.education_level)
 
 
                 return res.render("teachers/edit", { teacher })

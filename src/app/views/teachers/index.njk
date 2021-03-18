@@ -2,8 +2,12 @@
 
 {% block content %}
 
-    <div class="card table-container">
+    <div class="header">
         <a href="/teachers/create">Cadastro</a>
+    
+    </div>
+    
+    <div class="card table-container">
         <table width="100%">
             <thead>{# cabeçalho #}
                 <tr>{# linha #}
@@ -20,12 +24,13 @@
                         <span style="background-image: url({{teachers.avatar_url}})"></span>
                          {{ teachers.name }}</td>
                         <td>{{ teachers.subjects_taught }}</td>
-                        <td>{{ teachers.total_studentes }}</td>
+                        <td>{{ teachers.total_students }}</td>
                         <td><a href="/teachers/{{ teachers.id }}">ver</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+    
 
 {% endblock content %}

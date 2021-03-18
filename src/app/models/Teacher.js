@@ -1,5 +1,6 @@
-const { date } = require('../../lib/utils')
+const { date, graduation } = require('../../lib/utils')
 const db = require('../../config/db')
+
 
 module.exports = {
     all(callback) {
@@ -19,29 +20,28 @@ module.exports = {
         // aqui inseri os dados no campo de dados
         const query = `       
         INSERT INTO teachers (
-            name,
             avatar_url,
-            birth,
-            education_level,
-            class_type,
-            subjects_taught,
+            name,
+            birth,              // Data de nascimento 
+            education_level,    //Grau de escolaridade
+            class_type,         //Tipo de aula
+            subjects_taught,    //Area de atuação
             created_at           
             ) VALUES ($1, $2, $3, $4, $5, $6, $7)   
             RETURNING id
         `
         const values = [
-            data.name,
             data.avatar_url,
-            data.birth,
-            data.education_level,
-            data.class_type,
-            data.subjects_taught,
-            date(Date.now()).iso
+            data.name,
+            date(data.birth).iso,   //o birth tem que ser trabalhado
+            data.education_level,   //Grau de escolaridade
+            data.class_type,        //Tipo de aula
+            data.subjects_taught,   //Area de atuação
+            date(Date.now()).iso    // created_at
         ]
-
         db.query(query, values, function(err, results) {
             if(err) throw `Database Erro! ${err}`
-
+            
             callback(results.rows[0])
         })
     },
@@ -79,10 +79,10 @@ module.exports = {
             data.subjects_taught,
             data.id
         ]
-
+        
         db.query(query, values, function(err, results){
             if(err) throw `DATABASE error! ${err}`
-
+            
             callback()
         })
     },

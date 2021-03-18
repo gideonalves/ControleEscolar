@@ -10,8 +10,13 @@ module.exports = {
        })
     },
 
-    create (req, res) {  
-        return res.render("students/create")
+    create (req, res) { 
+        
+        Student.teachersSelectOptions(function(options) {
+
+            return res.render("students/create", { teacherOptions: options })
+        })
+
     },
      
     post (req, res) {
@@ -48,10 +53,12 @@ module.exports = {
                 if (!student) return res.send("Student not found!")
 
                 student.birth = date(student.birth).iso
-                student.educational_level = grade(student.educational_level)
                 student.created_at = date(student.created_at).format
 
-                return res.render("students/edit", { student })
+                Student.teachersSelectOptions(function(options) {
+                    return res.render("students/edit", { student, teacherOptions: options })
+                })
+
         })
     },
 
