@@ -5,9 +5,17 @@ const Teacher = require('../models/Teacher')
 module.exports = {
 
     index (req, res) {  
-       Teacher.all(function(teacher) {
-           return res.render("teachers/index", { teacher })
-       })
+        const { filter } = req.query
+
+        if ( filter ) {
+            Teacher.findBy(filter, function(tachers) {
+            return res.render("teachers/index", { teacher, filter })
+            })
+        } else {
+            Teacher.all(function(teachers) {
+                return res.render("teachers/index", { teacher })
+            })  
+        }
     },
 
     show (req, res) {    
@@ -40,9 +48,7 @@ module.exports = {
         })
     
     },
-    
-
-    
+        
     edit (req, res) {   
             Teacher.find(req.params.id, function(teacher) {
                 if (!teacher) return res.send("Teacher not found!")
@@ -53,7 +59,7 @@ module.exports = {
 
                 teacher.created_at = date(teacher.created_at).format
 
-
+                console.log(teacher)
 
                 return res.render("teachers/edit", { teacher })
         })

@@ -39,9 +39,11 @@ module.exports = {
 
             student.birth = date(student.birth).birthDay
 
-            student.created_at = date(student.created_at).format
+            // student.created_at = date(student.created_at).format
 
             student.grade = grade(student.grade)
+
+            console.log(student)
 
 
             return res.render("students/show", { student })
