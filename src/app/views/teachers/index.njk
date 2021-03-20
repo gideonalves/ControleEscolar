@@ -1,13 +1,22 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-
-    <div class="header">
-        <a href="/teachers/create">Cadastro</a>
-    
-    </div>
-    
     <div class="card table-container">
+
+        <div class="header">
+            <a class="button" href="/teachers/create">Novo</a>
+
+            <form action="/teachers" method="get">
+                <input 
+                    type="text" 
+                    name="filter"
+                    placeholder="Nome ou Atendimento"
+                    value={{filter}}
+                >    
+                <button type="submit">Filtrar</button>            
+            </form>
+        </div>
+    
         <table width="100%">
             <thead>{# cabeçalho #}
                 <tr>{# linha #}

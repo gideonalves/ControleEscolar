@@ -1,6 +1,6 @@
 // [x] Nessa etapa, você deve criar um relacionamento entre o professor e o estudante. 
 
-// [] Além disso, deve-se implementar filtros na listagem da tabela de professores.
+// [x] Além disso, deve-se implementar filtros na listagem da tabela de professores.
 
 // [x] Relacionamentos
 // Adicione um campo teacher_id na tabela de estudantes.
@@ -16,4 +16,4 @@
 // [] No método index do controller, faça uma verificação para checar se existem filtros passados por query params. 
 
 // [] Se existir, crie um método findBy no model que retorna todos os professores 
-// que que tiverem o nome ou a área de atuação em comum com o filtro passado (utilize o ILIKE).
+// que que tiverem o nome ou a área de atuação em comum com o filtro passado (utilize o ILIKE).j

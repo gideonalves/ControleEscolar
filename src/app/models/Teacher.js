@@ -86,6 +86,20 @@ module.exports = {
             callback()
         })
     },
+    // Filtro
+    findBy(filter, callback) {
+        db.query(`
+        SELECT teachers.*, count(students) AS total_students
+        FROM teachers
+        LEFT JOIN students ON (teachers.id = students.teacher_id)
+        WHERE teachers.name ILIKE '%${filter}%'
+        GROUP BY teachers.id
+        ORDER BY total_students DESC`, function(err, results){            
+            if(err) throw `Database Erro! ${err}`
+
+            callback(results.rows)
+        })
+    },
 
     delete(id, callback) {
         db.query(`DELETE FROM teachers WHERE id = $1`, [id], function(err, results) {
