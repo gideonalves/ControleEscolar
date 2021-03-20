@@ -22,10 +22,10 @@ module.exports = {
         INSERT INTO teachers (
             avatar_url,
             name,
-            birth,              // Data de nascimento 
-            education_level,    //Grau de escolaridade
-            class_type,         //Tipo de aula
-            subjects_taught,    //Area de atuação
+            birth,               
+            education_level,    
+            class_type,         
+            subjects_taught,    
             created_at           
             ) VALUES ($1, $2, $3, $4, $5, $6, $7)   
             RETURNING id
@@ -33,11 +33,11 @@ module.exports = {
         const values = [
             data.avatar_url,
             data.name,
-            date(data.birth).iso,   //o birth tem que ser trabalhado
-            data.education_level,   //Grau de escolaridade
-            data.class_type,        //Tipo de aula
-            data.subjects_taught,   //Area de atuação
-            date(Date.now()).iso    // created_at
+            date(data.birth).iso,   
+            data.education_level,   
+            data.class_type,        
+            data.subjects_taught,   
+            date(Date.now()).iso    
         ]
         db.query(query, values, function(err, results) {
             if(err) throw `Database Erro! ${err}`
@@ -57,7 +57,7 @@ module.exports = {
             callback(results.rows[0])
         })       
     },
-
+    
     update(data, callback){
         const query = `
         UPDATE teachers SET
