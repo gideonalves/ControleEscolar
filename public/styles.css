@@ -276,7 +276,7 @@ td:last-child {
 
 .table-container .header form {
     display: grid;
-    grid-template-columns: 1fr 120px;
+    grid-template-columns: 1fr 110px;
     align-items: center;
     grid-gap: 8px;
 }
@@ -290,3 +290,4 @@ td:last-child {
 .table-container .header form button {
     margin: 0;
 }
+

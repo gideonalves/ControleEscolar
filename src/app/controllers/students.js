@@ -56,11 +56,11 @@ module.exports = {
 
                 student.birth = date(student.birth).iso
                 student.created_at = date(student.created_at).format
-
+                
                 Student.teachersSelectOptions(function(options) {
                     return res.render("students/edit", { student, teacherOptions: options })
                 })
-
+                console.log(student)
         })
     },
 
